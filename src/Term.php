@@ -5,6 +5,9 @@ namespace Kacarroll\CloudSearchQuery;
 
 class Term
 {
+    /**
+     * @var string[]
+     */
     protected array $values;
 
     protected ?string $field = null;

@@ -6,7 +6,7 @@ namespace Kacarroll\CloudSearchQuery;
 class Literal
 {
     /**
-     * (int|string)
+     * @var (int|string)[]
      */
     protected array $values;
 

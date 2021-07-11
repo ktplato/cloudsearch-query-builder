@@ -14,13 +14,24 @@ class Builder
 
     protected string $sort = "_score desc";
 
+    /**
+     * @var Term[]
+     */
     protected array $terms = [];
 
+    /**
+     * @var Literal[]
+     */
     protected array $literals = [];
 
+    /**
+     * @var array[]
+     */
     protected array $facets = [];
 
-
+    /**
+     * @param string[] $values
+     */
     public function terms(array $values, ?string $field = null): self
     {
         if (empty($values)) {
@@ -32,6 +43,9 @@ class Builder
         return $this;
     }
 
+    /**
+     * @param (int|string)[] $values
+     */
     public function literals(array $values, string $field): self
     {
         if (empty($values)) {
