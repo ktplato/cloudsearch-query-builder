@@ -1,5 +1,15 @@
 {
     "require-dev": {
         "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kacarroll\\CloudSearchQuery\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kacarroll\\CloudSearchQuery\\Tests\\": "tests/"
+        }
     }
 }
