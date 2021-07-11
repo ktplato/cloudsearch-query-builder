@@ -77,7 +77,7 @@ class Builder
             throw new \InvalidArgumentException('Parameter "$direction" is only allowed asc or desc.');
         }
 
-        $this->sort = $field . ' ' . $direction;
+        $this->sort = "$field $direction";
 
         return $this;
     }
