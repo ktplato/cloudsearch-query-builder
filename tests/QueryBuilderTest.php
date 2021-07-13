@@ -164,4 +164,17 @@ class QueryBuilderTest extends TestCase
 
         $this->assertSame("(and (and foo:'one' foo:'two') (or bar:'three'))", $parameters['query']);
     }
+
+    public function testSubQuery()
+    {
+        $parameters = (new Builder)
+            ->subQuery(function (Builder $query) {
+                $query->terms(['one', 'two'], 'foo')
+                    ->literals(['three'], 'bar');
+            })
+            ->terms(['four'])
+            ->build();
+            
+        $this->assertSame("(and (and (or (term field=foo 'one') (term field=foo 'two')) (or bar:'three')) (or (term 'four')))", $parameters['query']);
+    }
 }

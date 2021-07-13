@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kacarroll\CloudSearchQuery;
 
+use Closure;
+
 class Builder
 {
     private const QUERY_PARSER = 'structured';
@@ -28,6 +30,11 @@ class Builder
      * @var array[]
      */
     protected array $facets = [];
+
+    /**
+     * @var Builder[]
+     */
+    protected array $subQueries = [];
 
     /**
      * @param string[] $values
@@ -96,6 +103,17 @@ class Builder
         return $this;
     }
 
+    public function subQuery(Closure $callback): self
+    {
+        $subQuery = new self;
+
+        $callback($subQuery);
+
+        $this->subQueries[] = $subQuery;
+
+        return $this;
+    }
+
     public function build()
     {
         $query = $this->compile();
@@ -116,6 +134,10 @@ class Builder
     protected function compile(): string
     {
         $phrases = [];
+
+        foreach ($this->subQueries as $subQuery) {
+            $phrases[] = $subQuery->compile();
+        }
 
         foreach ($this->terms as $term) {
             $phrases[] = $term->generatePhrase();
