@@ -7,6 +7,6 @@ class Util
 {
     public static function wrap(string $clause, string $operator = "or"): string
     {
-        return "({$operator} " . $clause . ")";
+        return "({$operator} $clause)";
     }
 }
