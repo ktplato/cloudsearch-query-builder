@@ -12,10 +12,13 @@ class Literal
 
     protected string $field;
 
-    public function __construct(array $values, string $field)
+    protected string $operator;
+
+    public function __construct(array $values, string $field, string $operator = 'or')
     {
         $this->values = $values;
         $this->field = $field;
+        $this->operator = $operator;
     }
 
     public function generatePhrase(): string
@@ -26,7 +29,7 @@ class Literal
             $clauses[] = $this->generateClause($value);
         }
 
-        return Util::wrap(implode(" ", $clauses));
+        return Util::wrap(implode(" ", $clauses), $this->operator);
     }
 
     protected function generateClause($value): string

@@ -32,13 +32,13 @@ class Builder
     /**
      * @param string[] $values
      */
-    public function terms(array $values, ?string $field = null): self
+    public function terms(array $values, ?string $field = null, string $operator = 'or'): self
     {
         if (empty($values)) {
             return $this;
         }
 
-        $this->terms[] = new Term($values, $field);
+        $this->terms[] = new Term($values, $field, $operator);
 
         return $this;
     }
@@ -46,13 +46,13 @@ class Builder
     /**
      * @param (int|string)[] $values
      */
-    public function literals(array $values, string $field): self
+    public function literals(array $values, string $field, string $operator = 'or'): self
     {
         if (empty($values)) {
             return $this;
         }
 
-        $this->literals[] = new Literal($values, $field);
+        $this->literals[] = new Literal($values, $field, $operator);
 
         return $this;
     }

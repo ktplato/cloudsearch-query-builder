@@ -144,4 +144,24 @@ class QueryBuilderTest extends TestCase
         
         $this->assertSame('{"foo":{"buckets":["one","two"]},"bar":{"buckets":["three","four"]}}', $parameters['facet']);
     }
+
+    public function testTermsOperatorCanBeChanged()
+    {
+        $parameters = (new Builder)
+            ->terms(['one', 'two'], 'foo', 'and')
+            ->terms(['three'])
+            ->build();
+
+        $this->assertSame("(and (and (term field=foo 'one') (term field=foo 'two')) (or (term 'three')))", $parameters['query']);
+    }
+
+    public function testLiteralOperatorCanBeChanged()
+    {
+        $parameters = (new Builder)
+            ->literals(['one', 'two'], 'foo', 'and')
+            ->literals(['three'], 'bar')
+            ->build();
+
+        $this->assertSame("(and (and foo:'one' foo:'two') (or bar:'three'))", $parameters['query']);
+    }
 }
