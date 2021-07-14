@@ -1,12 +1,12 @@
 <?php
 declare(strict_types = 1);
 
-namespace Kacarroll\CloudSearch\Tests;
+namespace Kacarroll\CloudSearch\Query\Tests;
 
 use Kacarroll\CloudSearch\Query\Builder;
 use PHPUnit\Framework\TestCase;
 
-class QueryBuilderTest extends TestCase
+class BuilderTest extends TestCase
 {
     public function testStart()
     {
