@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Kacarroll\CloudSearchQuery;
+namespace Kacarroll\CloudSearch\Query;
 
 class Util
 {

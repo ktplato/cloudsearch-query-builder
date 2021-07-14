@@ -1,20 +1,20 @@
 <?php
 declare(strict_types = 1);
 
-namespace Kacarroll\CloudSearchQuery;
+namespace Kacarroll\CloudSearch\Query;
 
-class Term
+class Literal
 {
     /**
-     * @var string[]
+     * @var (int|string)[]
      */
     protected array $values;
 
-    protected ?string $field = null;
+    protected string $field;
 
     protected string $operator;
 
-    public function __construct(array $values, ?string $field = null, string $operator = 'or')
+    public function __construct(array $values, string $field, string $operator = 'or')
     {
         $this->values = $values;
         $this->field = $field;
@@ -32,12 +32,15 @@ class Term
         return Util::wrap(implode(" ", $clauses), $this->operator);
     }
 
-    protected function generateClause(string $value): string
+    protected function generateClause($value): string
     {
-        if ($this->field === null) {
-            return "(term '{$value}')";
-        }
+        $wrapped = $this->wrapInSingleQuote($value);
 
-        return "(term field={$this->field} '{$value}')";
+        return "{$this->field}:{$wrapped}";
+    }
+
+    protected function wrapInSingleQuote($target)
+    {
+        return is_integer($target) ? $target : "'{$target}'";
     }
 }

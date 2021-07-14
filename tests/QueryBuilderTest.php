@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace Kacarroll\CloudSearchQuery\Tests;
+namespace Kacarroll\CloudSearch\Tests;
 
-use Kacarroll\CloudSearchQuery\Builder;
+use Kacarroll\CloudSearch\Query\Builder;
 use PHPUnit\Framework\TestCase;
 
 class QueryBuilderTest extends TestCase

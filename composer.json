@@ -4,12 +4,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Kacarroll\\CloudSearchQuery\\": "src/"
+            "Kacarroll\\CloudSearch\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kacarroll\\CloudSearchQuery\\Tests\\": "tests/"
+            "Kacarroll\\CloudSearch\\Tests\\": "tests/"
         }
     }
 }
