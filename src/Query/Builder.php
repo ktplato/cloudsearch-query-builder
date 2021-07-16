@@ -133,21 +133,21 @@ class Builder
 
     protected function compile(): string
     {
-        $phrases = [];
+        $clauses = [];
 
         foreach ($this->subQueries as $subQuery) {
-            $phrases[] = $subQuery->compile();
+            $clauses[] = $subQuery->compile();
         }
 
         foreach ($this->terms as $term) {
-            $phrases[] = $term->generatePhrase();
+            $clauses[] = $term->generateClause();
         }
 
         foreach ($this->literals as $literal) {
-            $phrases[] = $literal->generatePhrase();
+            $clauses[] = $literal->generateClause();
         }
 
-        return Util::wrap(implode(" ", $phrases), 'and');
+        return Util::wrap(implode(" ", $clauses), 'and');
     }
 
     protected function generateFacetQuery(): string

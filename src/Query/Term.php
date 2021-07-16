@@ -21,18 +21,18 @@ class Term
         $this->operator = $operator;
     }
 
-    public function generatePhrase(): string
+    public function generateClause(): string
     {
-        $clauses = [];
+        $phrases = [];
 
         foreach ($this->values as $value) {
-            $clauses[] = $this->generateClause($value);
+            $phrases[] = $this->generatePhrase($value);
         }
 
-        return Util::wrap(implode(" ", $clauses), $this->operator);
+        return Util::wrap(implode(" ", $phrases), $this->operator);
     }
 
-    protected function generateClause(string $value): string
+    protected function generatePhrase(string $value): string
     {
         if ($this->field === null) {
             return "(term '{$value}')";
