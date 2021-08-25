@@ -187,4 +187,35 @@ class BuilderTest extends TestCase
 
         $this->assertSame("(or (or (term field=foo 'one')))", $parameters['query']);
     }
+
+    public function testEmptySubQueryIsNotCompiled()
+    {
+        $queryParameter = (new Builder)
+            ->subQuery(function (Builder $query) {
+                $query->or()
+                    ->literals(['one'], 'foo')
+                    ->literals(['two'], 'bar');
+            })
+            ->subQuery(function (Builder $query) {
+                //
+            })
+            ->subQuery(function (Builder $query) {
+                $query->or()
+                    ->literals([], 'baz');
+            })
+            ->subQuery(function (Builder $query) {
+                $query->or()
+                    ->terms([], 'qux');
+            })
+            ->build();
+
+        $this->assertSame("(and (or (or foo:'one') (or bar:'two')))", $queryParameter['query']);
+    }
+
+    public function testEmptyQueryIsReturnNullQuery()
+    {
+        $queryParameter = (new Builder)->build();
+
+        $this->assertNull($queryParameter['query']);
+    }
 }

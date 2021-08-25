@@ -148,9 +148,12 @@ class Builder
         return $parameters;
     }
 
-    protected function compile(): string
+    protected function compile(): ?string
     {
         $clauses = [];
+
+        if ($this->isEmpty())
+            return null;
 
         foreach ($this->subQueries as $subQuery) {
             $clauses[] = $subQuery->compile();
@@ -164,7 +167,23 @@ class Builder
             $clauses[] = $literal->generateClause();
         }
 
+        $clauses = \array_filter($clauses);
+
         return Util::wrap(implode(" ", $clauses), $this->operator);
+    }
+
+    protected function isEmpty(): bool
+    {
+        return $this->allSubQueriesAreEmpty()
+            && empty($this->terms)
+            && empty($this->literals);
+    }
+
+    protected function allSubQueriesAreEmpty(): bool
+    {
+        return \array_reduce($this->subQueries, function (bool $carry, Builder $builder) {
+            return $builder->isEmpty() && $carry;
+        }, true);
     }
 
     protected function generateFacetQuery(): string
