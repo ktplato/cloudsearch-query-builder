@@ -177,4 +177,14 @@ class BuilderTest extends TestCase
             
         $this->assertSame("(and (and (or (term field=foo 'one') (term field=foo 'two')) (or bar:'three')) (or (term 'four')))", $parameters['query']);
     }
+
+    public function testChangeOperator()
+    {
+        $parameters = (new Builder)
+            ->or()
+            ->terms(['one'], 'foo')
+            ->build();
+
+        $this->assertSame("(or (or (term field=foo 'one')))", $parameters['query']);
+    }
 }

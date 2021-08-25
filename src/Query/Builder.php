@@ -10,6 +10,8 @@ class Builder
 {
     private const QUERY_PARSER = 'structured';
 
+    protected string $operator = 'and';
+
     protected int $page = 1;
 
     protected int $size = 50;
@@ -35,6 +37,21 @@ class Builder
      * @var Builder[]
      */
     protected array $subQueries = [];
+
+
+    public function and(): self
+    {
+        $this->operator = 'and';
+
+        return $this;
+    }
+
+    public function or(): self
+    {
+        $this->operator = 'or';
+
+        return $this;
+    }
 
     /**
      * @param string[] $values
@@ -147,7 +164,7 @@ class Builder
             $clauses[] = $literal->generateClause();
         }
 
-        return Util::wrap(implode(" ", $clauses), 'and');
+        return Util::wrap(implode(" ", $clauses), $this->operator);
     }
 
     protected function generateFacetQuery(): string
