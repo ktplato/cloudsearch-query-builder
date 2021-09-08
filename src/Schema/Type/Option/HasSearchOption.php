@@ -7,6 +7,9 @@ trait HasSearchOption
 {
     protected bool $searchEnabled = true;
 
+    /**
+     * @return static
+     */
     public function searchEnabled(): self
     {
         $this->searchEnabled = true;
@@ -14,6 +17,9 @@ trait HasSearchOption
         return $this;
     }
 
+    /**
+     * @return static
+     */
     public function searchDisabled(): self
     {
         $this->searchEnabled = false;

@@ -7,6 +7,9 @@ trait HasHighlightOption
 {
     protected bool $highlightEnabled = false;
 
+    /**
+     * @return static
+     */
     public function highlightEnabled(): self
     {
         $this->highlightEnabled = true;
@@ -14,6 +17,9 @@ trait HasHighlightOption
         return $this;
     }
 
+    /**
+     * @return static
+     */
     public function highlightDisabled(): self
     {
         $this->highlightEnabled = false;

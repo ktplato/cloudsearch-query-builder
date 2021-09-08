@@ -7,6 +7,9 @@ trait HasFacetOption
 {
     protected bool $facetEnabled = false;
 
+    /**
+     * @return static
+     */
     public function facetEnabled(): self
     {
         $this->facetEnabled = true;
@@ -14,6 +17,9 @@ trait HasFacetOption
         return $this;
     }
 
+    /**
+     * @return static
+     */
     public function facetDisabled(): self
     {
         $this->facetEnabled = false;

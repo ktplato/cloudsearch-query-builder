@@ -7,6 +7,9 @@ trait HasReturnOption
 {
     protected bool $returnEnabled = true;
 
+    /**
+     * @return static
+     */
     public function returnEnabled(): self
     {
         $this->returnEnabled = true;
@@ -14,6 +17,9 @@ trait HasReturnOption
         return $this;
     }
 
+    /**
+     * @return static
+     */
     public function returnDisabled(): self
     {
         $this->returnEnabled = false;

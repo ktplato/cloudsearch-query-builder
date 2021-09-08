@@ -7,6 +7,9 @@ trait HasSortOption
 {
     protected bool $sortEnabled = false;
 
+    /**
+     * @return static
+     */
     public function sortEnabled(): self
     {
         $this->sortEnabled = true;
@@ -14,6 +17,9 @@ trait HasSortOption
         return $this;
     }
 
+    /**
+     * @return static
+     */
     public function sortDisabled(): self
     {
         $this->sortEnabled = false;
